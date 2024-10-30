@@ -1,108 +1,56 @@
-#include "../includes/Character.hpp"
-#include "../includes/Cure.hpp"
-#include "../includes/ICharacter.hpp"
-#include "../includes/IMateriaSource.hpp"
-#include "../includes/Ice.hpp"
-#include "../includes/MateriaSource.hpp"
+#include "../includes/Bureaucrat.hpp"
 #include "../includes/colors.hpp"
+#include <exception>
 #include <iostream>
 
 int main() {
-    IMateriaSource *src = new MateriaSource();
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Filling Metaria source with 4 metaria:" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
 
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "trying to overfill spellbook metaria" << RESET << std::endl;
+	std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
+    std::cout << NGREEN << "trying correct input" << RESET << std::endl;
     std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
 
-    src->learnMateria(new Cure());
-    src->learnMateria(new Cure());
+    std::cout << NPURPLE << "creating Michael" << RESET << std::endl;
+	try {
+		Bureaucrat Michael("Michael Scott", 1); // Correct input
+		std::cout << Michael;
+		Michael.Downgrade();
+		Michael.Upgrade();
+		// Michael.Upgrade();
+	} catch (std::exception &e) {
+		std::cout << e.what();
+	}
 
     std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "creating Character \"Georges\" and equiping it with 2 metarias:" << RESET << std::endl;
+    std::cout << NRED << "trying incorrect input" << RESET << std::endl;
     std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
 
-    ICharacter *me = new Character("Georges");
-    AMateria *tmp;
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
+    std::cout << NPURPLE << "creating Jim" << RESET << std::endl;
+	try {
+		Bureaucrat Jim("Jim Halper", 2); // Incorrect input
+		std::cout << Jim;
+		Jim.Upgrade();
+		Jim.Upgrade();
+	} catch (std::exception &e) {
+		std::cout << e.what();
+	}
 
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Trying to over equip Georges or creating invalid metaria" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
+    std::cout << NPURPLE << "creating Dwight" << RESET << std::endl;
+	try {
+		Bureaucrat Dwight("Dwight Schrute", 150); // Incorrect input
+		std::cout << Dwight;
+		Dwight.Downgrade();
+		Dwight.Downgrade();
+	} catch (std::exception &e) {
+		std::cout << e.what();
+	}
 
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
-    tmp = src->createMateria("fire");
-    me->equip(tmp);
-    tmp = src->createMateria("water");
-    me->equip(tmp);
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Georges Attacking new Character Bob:" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-
-    ICharacter *bob = new Character("Bob");
-    me->use(0, *bob);
-    me->use(0, *bob);
-    me->use(1, *bob);
-    me->use(2, *bob);
-    me->use(3, *bob);
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Trying to unequip materia n.0 of Georges inventory and attacking Bob" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-
-    me->unequip(0);
-    me->unequip(0);
-    me->unequip(0);
-    me->use(0, *bob);
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Georges Trying unequip or attack Bob with invalid inventory items" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-
-    me->use(42, *bob);
-    me->use(-42, *bob);
-    me->unequip(-42);
-    me->unequip(42);
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Testing deep copy" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-
-    Character bobby("deepcopy");
-    tmp = src->createMateria("ice");
-    bobby.equip(tmp);
-    Character cpy(bobby);
-    bobby.unequip(0);
-    cpy.use(0, bobby);
-    cpy.use(1, bobby);
-    cpy.use(2, bobby);
-    cpy.use(3, bobby);
-
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-    std::cout << NGREEN << "Destructors calling" << RESET << std::endl;
-    std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
-
-    delete bob;
-    delete me;
-    delete src;
-
-    return 0;
+    std::cout << NPURPLE << "creating Pam Beesly" << RESET << std::endl;
+	try {
+		Bureaucrat Pam("Pam Beesly", 151); // Incorrect input
+		std::cout << Pam;
+		Pam.Downgrade();
+		Pam.Downgrade();
+	} catch (std::exception &e) {
+		std::cout << e.what();
+	}
 }
