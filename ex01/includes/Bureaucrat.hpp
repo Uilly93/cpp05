@@ -6,6 +6,8 @@
 #include <iostream>
 #include <ostream>
 
+class Form;
+
 class Bureaucrat {
 	public:
 	// Constructor
@@ -29,6 +31,7 @@ class Bureaucrat {
 	// Methods
 	const std::string getName() const;
 	unsigned int getGrade() const;
+	void signForm(Form &form) const;
 
 	void Upgrade();
 	void Downgrade();

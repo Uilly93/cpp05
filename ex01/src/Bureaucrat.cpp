@@ -1,5 +1,7 @@
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
 #include "../includes/colors.hpp"
+#include <exception>
 #include <ostream>
 
 // Constructors
@@ -61,17 +63,26 @@ void Bureaucrat::Downgrade() {
 	std::cout << NRED << _name << RED << " Downgraded to " << NRED << _grade << RESET << std::endl;
 }
 
-// Exceptions
-
-const char *Bureaucrat::GradeIsTooHighException::what() const throw() {
-	return (RED "Error: Grade is too HIGH\n" RESET);
-}
-
-const char *Bureaucrat::GradeIsTooLowException::what() const throw() {
-	return (RED "Error: Grade is too LOW\n" RESET);
+void Bureaucrat::signForm(Form &form) const{
+	try {
+		form.beSigned(*this);
+	} catch (std::exception &e) {
+		std::cout << NRED << _name << RED " couldn't sign " NRED << form.getName() << RED " Because " << e.what();
+	}
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &src) {
 	return out << NGREEN << src.getName() << GREEN << ", bureaucrat grade: " << NGREEN
 			   << src.getGrade() << "." << RESET << std::endl;
 }
+
+// Exceptions
+
+const char *Bureaucrat::GradeIsTooHighException::what() const throw() {
+	return (RED "Bureaucrat: Grade is too HIGH\n" RESET);
+}
+
+const char *Bureaucrat::GradeIsTooLowException::what() const throw() {
+	return (RED "Bureaucrat: Grade is too LOW\n" RESET);
+}
+
