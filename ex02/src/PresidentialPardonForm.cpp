@@ -42,9 +42,16 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 	}
 	return *this;
 }
-// Methods
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor) const{
-	
+const char *PresidentialPardonForm::GradeTooLowException::what() const throw() {
+	return (RED "Error: PresidentialPardonForm\n" RESET);
 }
 
+// Methods
+
+void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
+	if (executor.getGrade() > _required_to_execute)
+		throw GradeTooLowException();
+	std::cout << NBLUE << _target << " has been pardoned by Zaphod Beeblebrox." << RESET
+			  << std::endl;
+}

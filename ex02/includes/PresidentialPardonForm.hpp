@@ -19,7 +19,6 @@ class PresidentialPardonForm : public AForm {
 
 	// Methods
 	void execute(Bureaucrat const & executor) const;
-	
 	private:
 	PresidentialPardonForm();
 	std::string _target;

@@ -1,5 +1,8 @@
 #include "../includes/RobotomyRequestForm.hpp"
 #include "../includes/colors.hpp"
+#include <exception>
+#include <fstream>
+#include <stdexcept>
 
 // Constructors
 RobotomyRequestForm::RobotomyRequestForm() {
@@ -42,4 +45,17 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &s
 	}
 	return *this;
 }
+
+const char *RobotomyRequestForm::GradeTooLowException::what() const throw() {
+	return (RED "Error: RobotomyRequestForm\n" RESET);
+}
 // Methods
+
+void RobotomyRequestForm::execute(Bureaucrat const & executor) const{
+	if (executor.getGrade() > _required_to_execute)
+		throw GradeTooLowException();
+	if(std::rand() % 2 == 0)
+		std::cout << NBLUE << _target << " has been robotomized succesfully" << RESET << std::endl;
+	else
+		std::cout << NBLUE << _target << " robotomy failed" << RESET << std::endl;
+}

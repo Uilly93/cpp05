@@ -1,11 +1,13 @@
 #include "../includes/Bureaucrat.hpp"
 #include "../includes/AForm.hpp"
 #include "../includes/colors.hpp"
+#include <cstdlib>
 #include <exception>
 #include <iostream>
 
 int main() {
 
+	std::srand(time(0));
 	std::cout << NPURPLE << "--------------------------------------------------------------"
 			  << RESET << std::endl;
 	std::cout << NGREEN << "trying correct input" << RESET << std::endl;

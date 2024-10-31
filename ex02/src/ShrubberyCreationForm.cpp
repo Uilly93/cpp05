@@ -1,5 +1,20 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 #include "../includes/colors.hpp"
+#include <fstream>
+
+static const std::string tree = "          &&& &&  & &&\n"
+								"      && &\\/&\\|& ()|/ @, &&\n"
+								"      &\\/(/&/&||/& /_/)_&/_&\n"
+								"   &() &\\/&|()|/&\\/ '%\" & ()\n"
+								"  &_\\_&&_\\ |& |&&/&__%_/_& &&\n"
+								"&&   && & &| &| /& & % ()& /&&\n"
+								" ()&_---()&\\&\\|&&-&&--%---()~\n"
+								"     &&     \\|||\n"
+								"             |||\n"
+								"             |||\n"
+								"             |||\n"
+								"       , -=-~  .-^- _\n"
+								"              `\n";
 
 // Constructors
 ShrubberyCreationForm::ShrubberyCreationForm() {
@@ -42,4 +57,20 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	}
 	return *this;
 }
+
+const char *ShrubberyCreationForm::GradeTooLowException::what() const throw() {
+	return (RED "Error: ShrubberyCreationForm\n" RESET);
+}
+
 // Methods
+
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
+	if (executor.getGrade() > _required_to_execute)
+		throw GradeTooLowException();
+	std::ofstream file(_target + "_shrubbery");
+	if (file.is_open()) {
+		file << tree;
+		file.close();
+	} else
+		throw std::runtime_error("fail open");
+}

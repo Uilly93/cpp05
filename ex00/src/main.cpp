@@ -3,8 +3,8 @@
 #include <exception>
 #include <iostream>
 
-int main() {
 
+int main() {
 	std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
     std::cout << NGREEN << "trying correct input" << RESET << std::endl;
     std::cout << NPURPLE << "--------------------------------------------------------------" << RESET << std::endl;
@@ -53,4 +53,5 @@ int main() {
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}
+
 }
