@@ -1,11 +1,11 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 #include <exception>
 #include <iostream>
 
-class Form {
+class AForm {
 	public:
 	// Exceptions
 	class GradeTooHighException : public std::exception {
@@ -16,30 +16,31 @@ class Form {
 		virtual const char *what() const throw();
 	};
 	// Constructor
-	Form(const std::string &name, unsigned int to_sign, unsigned int to_exec);
-	Form(const Form &src);
+	AForm(const std::string &name, unsigned int to_sign, unsigned int to_exec);
+	AForm(const AForm &src);
 
 	// Destructor
-	~Form();
+	virtual ~AForm();
 
 	// Operator Overload
-	Form &operator=(const Form &src);
+	AForm &operator=(const AForm &src);
 
 	// Methods
 	unsigned int reqSign() const;
 	unsigned int reqExec() const;
 	bool isSigned() const;
 	std::string getName() const;
-	void beSigned(Bureaucrat const &bureaucrat);
+	virtual void beSigned(Bureaucrat const &bureaucrat);
+	virtual void execute(Bureaucrat const & executor) const = 0;
 
-	private:
-	Form();
+	protected:
+	AForm();
 	std::string _name;
 	bool _is_signed;
 	unsigned int _required_to_sign;
 	unsigned int _required_to_execute;
 };
 
-std::ostream &operator<<(std::ostream &out, Form const &src);
+std::ostream &operator<<(std::ostream &out, AForm const &src);
 
 #endif
