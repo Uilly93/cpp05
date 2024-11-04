@@ -12,11 +12,11 @@ Bureaucrat::Bureaucrat() {
 }
 
 Bureaucrat::Bureaucrat(const std::string name, unsigned int grade) {
-	std::cout << GREEN << "Bureaucrat Default Constructor called" << RESET << std::endl;
 	if (grade > 150)
 		throw GradeIsTooLowException();
 	else if (grade < 1)
 		throw GradeIsTooHighException();
+	std::cout << GREEN << "Bureaucrat Default Constructor called" << RESET << std::endl;
 	_name = name;
 	_grade = grade;
 }

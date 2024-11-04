@@ -12,11 +12,11 @@ Form::Form() {
 }
 
 Form::Form(const std::string &name, unsigned int to_sign, unsigned int to_exec) {
-	std::cout << GREEN << "Form Default Constructor called" << RESET << std::endl;
 	if (to_sign > 150 || to_exec > 150)
 		throw GradeTooLowException();
 	else if (to_sign < 1 || to_exec < 1)
 		throw GradeTooHighException();
+	std::cout << GREEN << "Form Default Constructor called" << RESET << std::endl;
 	_name = name;
 	_required_to_sign = to_sign;
 	_required_to_execute = to_exec;
