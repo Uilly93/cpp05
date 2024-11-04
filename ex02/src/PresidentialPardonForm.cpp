@@ -24,6 +24,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src
 	std::cout << BLUE << "PresidentialPardonForm Copy Constructor called" << RESET << std::endl;
 	*this = src;
 }
+
 // Destructor
 PresidentialPardonForm::~PresidentialPardonForm() {
 	std::cout << RED << "PresidentialPardonForm Destructor called " << RESET << std::endl;
@@ -48,7 +49,6 @@ const char *PresidentialPardonForm::GradeTooLowException::what() const throw() {
 }
 
 // Methods
-
 std::string PresidentialPardonForm::getTarget() const {
 	return _target;
 }
@@ -57,7 +57,9 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
 	if (executor.getGrade() > _required_to_execute) {
 		throw GradeTooLowException();
 	}
-	std::cout << NBLUE << _target << " has been pardoned by Zaphod Beeblebrox." << RESET
+	std::cout << NBLUE << executor.getName() << BLUE << " Executed " << NBLUE << _target << RESET
+			  << std::endl;
+	std::cout << NBLUE << executor.getName() << " has been pardoned by Zaphod Beeblebrox." << RESET
 			  << std::endl;
 }
 

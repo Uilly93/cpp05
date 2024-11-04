@@ -77,6 +77,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	if (file.is_open()) {
 		file << tree;
 		file.close();
+		std::cout << NBLUE << executor.getName() << BLUE << " Executed " << NBLUE << _target << RESET
+				  << std::endl;
 		std::cout << NGREEN << fname << GREEN << " ASCII Tree created !" << RESET << std::endl;
 	} else
 		throw std::runtime_error("fail open");

@@ -2,6 +2,7 @@
 #include "../includes/AForm.hpp"
 #include "../includes/colors.hpp"
 #include <exception>
+#include <iostream>
 #include <ostream>
 
 // Constructors
@@ -25,6 +26,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &src) {
 	std::cout << BLUE << "Bureaucrat Copy Constructor called" << RESET << std::endl;
 	*this = src;
 }
+
 // Destructor
 Bureaucrat::~Bureaucrat() {
 	std::cout << RED << "Bureaucrat Destructor called " << RESET << std::endl;
