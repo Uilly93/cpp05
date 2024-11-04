@@ -19,6 +19,7 @@ class Intern {
 	// Methods
 	AForm *makeForm(std::string name, std::string target) const;
 	int choseCase(std::string name) const;
+
 	private:
 };
 

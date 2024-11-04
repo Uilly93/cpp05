@@ -35,8 +35,8 @@ Intern &Intern::operator=(const Intern &src) {
 int Intern::choseCase(std::string name) const {
 	std::string tab[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
 
-	for(int i = 0; i < 3; i++){
-		if(name == tab[i])
+	for (int i = 0; i < 3; i++) {
+		if (name == tab[i])
 			return i;
 	}
 	return -1;
@@ -45,18 +45,18 @@ int Intern::choseCase(std::string name) const {
 AForm *Intern::makeForm(std::string name, std::string target) const {
 	int form = this->choseCase(name);
 	switch (form) {
-		case -1:
-			throw std::invalid_argument(RED "invalid Form name\n" RESET);
-		case 0:
-			return new ShrubberyCreationForm(target);
-		case 1:
-			return new RobotomyRequestForm(target);
-		case 2:
-			return new PresidentialPardonForm(target);
-		default:
-			throw std::invalid_argument("invalid Form name");
+	case -1:
+		throw std::invalid_argument(RED "invalid Form name\n" RESET);
+	case 0:
+		std::cout << NGREEN << "Intern creates ShrubberyCreationForm" << RESET << std::endl;
+		return new ShrubberyCreationForm(target);
+	case 1:
+		std::cout << NGREEN << "Intern creates RobotomyRequestForm" << RESET << std::endl;
+		return new RobotomyRequestForm(target);
+	case 2:
+		std::cout << NGREEN << "Intern creates PresidentialPardonForm" << RESET << std::endl;
+		return new PresidentialPardonForm(target);
+	default:
+		throw std::invalid_argument("invalid Form name");
 	}
 }
-
-
-
