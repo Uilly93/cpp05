@@ -44,14 +44,35 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 }
 
 const char *PresidentialPardonForm::GradeTooLowException::what() const throw() {
-	return (RED "Error: PresidentialPardonForm\n" RESET);
+	return (NRED "Error: PresidentialPardonForm\nBureaucrat Grade too Low\n" RESET);
 }
 
 // Methods
 
+std::string PresidentialPardonForm::getTarget() const {
+	return _target;
+}
+
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
-	if (executor.getGrade() > _required_to_execute)
+	if (executor.getGrade() > _required_to_execute){
 		throw GradeTooLowException();
+	}
 	std::cout << NBLUE << _target << " has been pardoned by Zaphod Beeblebrox." << RESET
 			  << std::endl;
+}
+
+std::ostream &operator<<(std::ostream &out, PresidentialPardonForm const &src) {
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
+	if (src.isSigned())
+		return out << PURPLE << "PresidentialPardonForm infos:\n"
+				   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+				   << "\nExecute requierment: " << src.reqExec() << "\nForm is signed\n"
+				   << NPURPLE << "--------------------------------------------------------------"
+				   << RESET << std::endl;
+	return out << PURPLE << "PresidentialPardonForm infos:\n"
+			   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+			   << "\nExecute requierment: " << src.reqExec() << "\nForm is not signed\n"
+			   << NPURPLE << "--------------------------------------------------------------"
+			   << RESET << std::endl;
 }

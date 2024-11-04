@@ -1,5 +1,8 @@
-#include "../includes/Bureaucrat.hpp"
 #include "../includes/AForm.hpp"
+#include "../includes/Bureaucrat.hpp"
+#include "../includes/PresidentialPardonForm.hpp"
+#include "../includes/RobotomyRequestForm.hpp"
+#include "../includes/ShrubberyCreationForm.hpp"
 #include "../includes/colors.hpp"
 #include <cstdlib>
 #include <exception>
@@ -8,58 +11,67 @@
 int main() {
 
 	std::srand(time(0));
-	std::cout << NPURPLE << "--------------------------------------------------------------"
-			  << RESET << std::endl;
-	std::cout << NGREEN << "trying correct input" << RESET << std::endl;
-	std::cout << NPURPLE << "--------------------------------------------------------------"
-			  << RESET << std::endl;
+	// Creating Bureaucrats
+	PresidentialPardonForm pres("Michael");
+	RobotomyRequestForm robot("Robotomy");
+	ShrubberyCreationForm shrub("Shrubbery");
 
-	std::cout << NPURPLE << "creating Michael" << RESET << std::endl;
+	// Creating Forms
+	Bureaucrat Michael("Michael Scott", 1);
+	Bureaucrat Jim("Jim Halpert", 40);
+	Bureaucrat Dwight("Dwight Schrute", 100);
+	std::cout << Michael;
+	std::cout << Jim;
+	std::cout << Dwight;
+	// AForm badForm(""); //Uncomment to see if the class is abstact
+
+	// Printing Forms infos
+	std::cout << shrub;
+	std::cout << robot;
+	std::cout << pres;
+
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
+	std::cout << NGREEN << "Trying to execute all Forms with Michael" << RESET << std::endl;
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
 	try {
-		Bureaucrat Michael("Michael Scott", 1); // Correct input
-		AForm bills("bills", 1, 1);
-		std::cout << Michael;
-		Michael.signForm(bills);
+
+		Michael.executeForm(shrub);
+		for (int i = 0; i < 10; i++)
+			Michael.executeForm(robot);
+		Michael.executeForm(pres);
+
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}
 
 	std::cout << NPURPLE << "--------------------------------------------------------------"
 			  << RESET << std::endl;
-	std::cout << NRED << "trying incorrect input" << RESET << std::endl;
+	std::cout << NGREEN << "Trying to execute all Forms with Jim" << RESET << std::endl;
 	std::cout << NPURPLE << "--------------------------------------------------------------"
 			  << RESET << std::endl;
-
-	std::cout << NPURPLE << "creating Jim" << RESET << std::endl;
 	try {
-		Bureaucrat Jim("Jim Halper", 2); // Incorrect input
-		std::cout << Jim;
-		std::cout << NPURPLE << "creating Form" << RESET << std::endl;
-		AForm bills("bills", 1, 1);
-		Jim.signForm(bills);
+		Jim.executeForm(shrub);
+		for (int i = 0; i < 10; i++)
+			Jim.executeForm(robot);
+		Jim.executeForm(pres);
+
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}
 
-	std::cout << NPURPLE << "creating Dwight" << RESET << std::endl;
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
+	std::cout << NGREEN << "Trying to execute all Forms with Dwight" << RESET << std::endl;
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
 	try {
-		Bureaucrat Dwight("Dwight Schrute", 150); // Incorrect input
-		std::cout << Dwight;
-		std::cout << NPURPLE << "creating Form" << RESET << std::endl;
-		AForm bills("bills", 150, 1);
-		Dwight.signForm(bills);
-	} catch (std::exception &e) {
-		std::cout << e.what();
-	}
+		Dwight.executeForm(shrub);
+		for (int i = 0; i < 10; i++)
+			Dwight.executeForm(robot);
+		Dwight.executeForm(pres);
 
-	std::cout << NPURPLE << "creating Pam Beesly" << RESET << std::endl;
-	try {
-		Bureaucrat Pam("Pam Beesly", 15); // Incorrect input
-		std::cout << NPURPLE << "creating Form" << RESET << std::endl;
-		AForm bills("bills", 151, 1);
-		std::cout << Pam;
-		Pam.Downgrade();
-		Pam.Downgrade();
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}

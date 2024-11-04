@@ -1,6 +1,7 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 #include "../includes/colors.hpp"
 #include <fstream>
+#include <iostream>
 
 static const std::string tree = "          &&& &&  & &&\n"
 								"      && &\\/&\\|& ()|/ @, &&\n"
@@ -59,18 +60,40 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 }
 
 const char *ShrubberyCreationForm::GradeTooLowException::what() const throw() {
-	return (RED "Error: ShrubberyCreationForm\n" RESET);
+	return (NRED "Error: ShrubberyCreationForm\nBureaucrat Grade too Low\n" RESET);
 }
 
 // Methods
+std::string ShrubberyCreationForm::getTarget() const {
+	return _target;
+}
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-	if (executor.getGrade() > _required_to_execute)
+	if (executor.getGrade() > _required_to_execute) {
 		throw GradeTooLowException();
-	std::ofstream file(_target + "_shrubbery");
+	}
+	std::string fname = _target + "_shrubbery";
+	std::ofstream file(fname.c_str());
 	if (file.is_open()) {
 		file << tree;
 		file.close();
+		std::cout << NGREEN << fname << GREEN << " ASCII Tree created !" << RESET << std::endl;
 	} else
 		throw std::runtime_error("fail open");
+}
+
+std::ostream &operator<<(std::ostream &out, ShrubberyCreationForm const &src) {
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
+	if (src.isSigned())
+		return out << PURPLE << "ShrubberyCreationForm infos:\n"
+				   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+				   << "\nExecute requierment: " << src.reqExec() << "\nForm is signed\n"
+				   << NPURPLE << "--------------------------------------------------------------"
+				   << RESET << std::endl;
+	return out << PURPLE << "ShrubberyCreationForm infos:\n"
+			   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+			   << "\nExecute requierment: " << src.reqExec() << "\nForm is not signed\n"
+			   << NPURPLE << "--------------------------------------------------------------"
+			   << RESET << std::endl;
 }

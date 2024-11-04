@@ -5,7 +5,10 @@ SRC_PATH	=	src/
 OBJ_PATH	=	.obj/
 SRC_NAME	=	main.cpp \
 				Bureaucrat.cpp \
-				Form.cpp 
+				AForm.cpp \
+				PresidentialPardonForm.cpp \
+				RobotomyRequestForm.cpp \
+				ShrubberyCreationForm.cpp 
 OBJ_NAME	=	$(SRC_NAME:.cpp=.o) 
 OBJ 		=	$(addprefix $(OBJ_PATH), $(OBJ_NAME))
 SRC 		=	$(addprefix $(SRC_PATH), $(SRC_NAME))

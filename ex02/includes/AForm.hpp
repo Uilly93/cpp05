@@ -30,7 +30,7 @@ class AForm {
 	unsigned int reqExec() const;
 	bool isSigned() const;
 	std::string getName() const;
-	virtual void beSigned(Bureaucrat const &bureaucrat);
+	void beSigned(Bureaucrat const &bureaucrat);
 	virtual void execute(Bureaucrat const & executor) const = 0;
 
 	protected:

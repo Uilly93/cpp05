@@ -1,5 +1,6 @@
 #include "../includes/RobotomyRequestForm.hpp"
 #include "../includes/colors.hpp"
+#include <cstdlib>
 #include <exception>
 #include <fstream>
 #include <stdexcept>
@@ -47,15 +48,38 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &s
 }
 
 const char *RobotomyRequestForm::GradeTooLowException::what() const throw() {
-	return (RED "Error: RobotomyRequestForm\n" RESET);
+	return (NRED "Error: RobotomyRequestForm\nBureaucrat Grade too Low\n" RESET);
 }
-// Methods
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const{
-	if (executor.getGrade() > _required_to_execute)
+// Methods
+std::string RobotomyRequestForm::getTarget() const {
+	return _target;
+}
+
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
+	if (executor.getGrade() > _required_to_execute) {
 		throw GradeTooLowException();
-	if(std::rand() % 2 == 0)
-		std::cout << NBLUE << _target << " has been robotomized succesfully" << RESET << std::endl;
-	else
-		std::cout << NBLUE << _target << " robotomy failed" << RESET << std::endl;
+	} else {
+		if (std::rand() % 2 == 0)
+			std::cout << NBLUE << _target << " has been robotomized succesfully" << RESET
+					  << std::endl;
+		else
+			std::cout << NBLUE << _target << " robotomy failed" << RESET << std::endl;
+	}
+}
+
+std::ostream &operator<<(std::ostream &out, RobotomyRequestForm const &src) {
+	std::cout << NPURPLE << "--------------------------------------------------------------"
+			  << RESET << std::endl;
+	if (src.isSigned())
+		return out << PURPLE << "RobotomyRequestForm infos:\n"
+				   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+				   << "\nExecute requierment: " << src.reqExec() << "\nForm is signed\n"
+				   << NPURPLE << "--------------------------------------------------------------"
+				   << RESET << std::endl;
+	return out << PURPLE << "RobotomyRequestForm infos:\n"
+			   << "Target: " << src.getTarget() << "\nSign requierment: " << src.reqSign()
+			   << "\nExecute requierment: " << src.reqExec() << "\nForm is not signed\n"
+			   << NPURPLE << "--------------------------------------------------------------"
+			   << RESET << std::endl;
 }

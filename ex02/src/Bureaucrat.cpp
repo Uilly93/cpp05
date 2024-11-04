@@ -63,12 +63,22 @@ void Bureaucrat::Downgrade() {
 	std::cout << NRED << _name << RED << " Downgraded to " << NRED << _grade << RESET << std::endl;
 }
 
-void Bureaucrat::signForm(AForm &form) const{
+void Bureaucrat::signForm(AForm &form) const {
 	try {
 		form.beSigned(*this);
 	} catch (std::exception &e) {
-		std::cout << NRED << _name << RED " couldn't sign " NRED << form.getName() << RED " Because " << e.what();
+		std::cout << NRED << _name << RED " couldn't sign " NRED << form.getName()
+				  << RED " Because " << e.what();
 	}
+}
+
+void Bureaucrat::executeForm(AForm const &form) const {
+	// try {
+		form.execute(*this);
+	// } catch (std::exception &e) {
+	// 	std::cout << NRED << _name << RED " couldn't execute " NRED << form.getName()
+	// 			  << RED " Because " << e.what();
+	// }
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &src) {
@@ -85,4 +95,3 @@ const char *Bureaucrat::GradeIsTooHighException::what() const throw() {
 const char *Bureaucrat::GradeIsTooLowException::what() const throw() {
 	return (RED "Bureaucrat: Grade is too LOW\n" RESET);
 }
-
