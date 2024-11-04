@@ -2,7 +2,6 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
-#include "colors.hpp"
 #include <iostream>
 
 class RobotomyRequestForm : public AForm {

@@ -1,4 +1,4 @@
-#include "../includes/AForm.hpp"
+// #include "../includes/AForm.hpp"
 #include "../includes/Bureaucrat.hpp"
 #include "../includes/PresidentialPardonForm.hpp"
 #include "../includes/RobotomyRequestForm.hpp"
@@ -9,7 +9,6 @@
 #include <iostream>
 
 int main() {
-
 	std::srand(time(0));
 	// Creating Bureaucrats
 	PresidentialPardonForm pres("Michael");
@@ -23,9 +22,9 @@ int main() {
 	std::cout << Michael;
 	std::cout << Jim;
 	std::cout << Dwight;
-	// AForm badForm(""); //Uncomment to see if the class is abstact
 
 	// Printing Forms infos
+	// AForm badForm(""); //Uncomment to see if the class is abstact
 	std::cout << shrub;
 	std::cout << robot;
 	std::cout << pres;

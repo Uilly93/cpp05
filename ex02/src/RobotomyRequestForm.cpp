@@ -1,9 +1,6 @@
 #include "../includes/RobotomyRequestForm.hpp"
 #include "../includes/colors.hpp"
 #include <cstdlib>
-#include <exception>
-#include <fstream>
-#include <stdexcept>
 
 // Constructors
 RobotomyRequestForm::RobotomyRequestForm() {
